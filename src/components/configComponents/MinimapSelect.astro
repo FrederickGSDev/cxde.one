@@ -1,0 +1,22 @@
+---
+
+---
+
+<select name="minimap" id="minimap" class="px-1 border rounded-md w-full text-sm">
+  <option value="on">ON</option>
+  <option value="off" selected>OFF</option>
+</select>
+
+<script>
+  import { $ } from "../../utils/dom";
+  import { optionsStore } from "../../stores/optionsStore";
+
+  const minimapSelect = $("#minimap");
+
+  minimapSelect.addEventListener("change", () => {
+    optionsStore.set({
+      ...optionsStore.get(),
+      minimap: minimapSelect.value === "on" ? true : false
+    });
+  });
+</script>

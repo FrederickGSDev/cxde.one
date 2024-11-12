@@ -1,0 +1,22 @@
+---
+
+---
+
+<select name="line-numbers" id="line-numbers" class="px-1 border rounded-md w-full text-sm">
+  <option value="on">ON</option>
+  <option value="off" selected>OFF</option>
+</select>
+
+<script>
+  import { $ } from "../../utils/dom";
+  import { optionsStore } from "../../stores/optionsStore";
+
+  const lineNumbersSelect = $("#line-numbers");
+
+  lineNumbersSelect.addEventListener("change", () => {
+    optionsStore.set({
+      ...optionsStore.get(),
+      lineNumbers: lineNumbersSelect.value
+    });
+  });
+</script>

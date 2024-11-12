@@ -1,0 +1,31 @@
+---
+import Grid from "../../icons/layouts/Grid.astro"
+import Vertical from "../../icons/layouts/Vertical.astro"
+import Horizontal from "../../icons/layouts/Horizontal.astro"
+import Top from "../../icons/layouts/Top.astro"
+import Bottom from "../../icons/layouts/Bottom.astro"
+import Right from "../../icons/layouts/Right.astro"
+import Left from "../../icons/layouts/Left.astro"
+---
+
+<div class="gap-2 grid grid-cols-4 pt-1">
+  <button class="w-8 aspect-square design-button" id="grid"><Grid/></button>
+  <button class="w-8 aspect-square design-button" id="vertical"><Vertical/></button>
+  <button class="w-8 aspect-square design-button" id="horizontal"><Horizontal/></button>
+  <button class="w-8 aspect-square design-button" id="top"><Top/></button>
+  <button class="w-8 aspect-square design-button" id="bottom"><Bottom/></button>
+  <button class="w-8 aspect-square design-button" id="right"><Right/></button>
+  <button class="w-8 aspect-square design-button" id="left"><Left/></button>
+</div>
+
+<script>
+  import { $$ } from "../../utils/dom"
+  import { designStore } from "../../stores/designStore"
+
+  $$(".design-button").forEach(button => {
+    button.addEventListener("click", () => {
+      const layout = button.id
+      designStore.set(layout)
+    })
+  })
+</script>

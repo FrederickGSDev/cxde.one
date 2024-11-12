@@ -1,0 +1,20 @@
+---
+
+---
+<div class="flex items-center gap-2">
+  <input type="range" name="delay" id="delay" min="0" step="100" max="3000" class="w-24 dark:accent-neutral-600 accent-neutral-300">
+  <span class="w-10 text-center text-sm" id="delay-number">200ms</span>
+</div>
+
+<script>
+  import { $ } from "../../utils/dom";
+  import { delayStore } from "../../stores/delayStore";
+
+  const delayInput = $("#delay");
+  const delayNumber = $("#delay-number");
+
+  delayInput.addEventListener("input", () => {
+    delayNumber.textContent = `${delayInput.value}ms`;
+    delayStore.set(delayInput.value);
+  });
+</script>

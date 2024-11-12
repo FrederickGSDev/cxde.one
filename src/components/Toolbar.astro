@@ -1,0 +1,97 @@
+---
+import Options from "./configComponents/Options.astro"
+import ThemeOptions from "./themeOptions/themeOptions.astro"
+
+import VimIcon from "../icons/VimIcon.astro"
+import MaximizeIcon from "../icons/MaximizeIcon.astro"
+import ExternalLinkIcon from "../icons/ExternalLinkIcon.astro"
+import ReloadIcon from "../icons/ReloadIcon.astro"
+import ShareIcon from "../icons/ShareIcon.astro"
+import DownloadIcon from "../icons/DownloadIcon.astro"
+import SettingsIcon from "../icons/SettingsIcon.astro"
+import ThemeIcon from "../icons/ThemeIcon.astro"
+---
+
+<aside class="flex justify-between items-center bg-light dark:bg-dark h-screen">
+  <div class="flex flex-col justify-between items-center px-2 py-4 h-full">
+    <div class="flex flex-col items-center gap-7">
+      <button class="rounded-full w-9 h-9 overflow-hidden">
+        <img src="/default-profile.webp" alt="profile">
+      </button>
+      <button class="toolbar-button" id="vimModeButton" aria-label="Vim mode"><VimIcon/></button>
+      <button class="toolbar-button" id="FullScreenButton" aria-label="Full screen"><MaximizeIcon/></button>
+      <button class="toolbar-button" id="FullPreviewButton" aria-label="Full preview"><ExternalLinkIcon/></button>
+      <button class="toolbar-button" id="ReloadButton" aria-label="Reload Iframe"><ReloadIcon/></button>
+    </div>
+    <div class="flex flex-col items-center gap-7">
+      <button class="toolbar-button" id="ShareButton" aria-label="Share code"><ShareIcon/></button>
+      <button class="toolbar-button" id="DownloadButton" aria-label="Download code"><DownloadIcon/></button>
+      <button class="toolbar-button" id="themeButton" aria-label="Customize theme"><ThemeIcon/></button>
+      <button class="toolbar-button" id="options-button" aria-label="Open Options"><SettingsIcon/></button>
+    </div>
+  </div>
+  <Options/>
+  <ThemeOptions/>
+</aside>
+
+<script>
+  import { $ } from "../utils/dom";
+  import { toggleVimMode } from '../utils/toggleVimMode'
+  import { copyUrl } from "../utils/copyUrl";
+  import { openPreviewWindow } from "../utils/openPreviewWindow";
+  import { downloadCode } from "../utils/downloadCode";
+
+  const optionsButton = $("#options-button");
+  const vimModeButton = $("#vimModeButton");
+  const ReloadButton = $("#ReloadButton");
+  const themeButton = $("#themeButton");
+  const FullScreenButton = $("#FullScreenButton");
+  const FullPreviewButton = $("#FullPreviewButton");
+  const DownloadButton = $("#DownloadButton");
+  const ShareButton = $("#ShareButton");
+  const options = $("#options");
+  const themeOptions = $("#themeOptions");
+
+
+  optionsButton.addEventListener("click", () => {
+    options.classList.toggle("hidden");
+    options.classList.toggle("flex");
+    optionsButton.classList.toggle("active");
+    themeOptions.classList.add("hidden");
+    themeOptions.classList.remove("flex");
+    themeButton.classList.remove("active");
+  });
+
+  vimModeButton.addEventListener("click", () => {
+    toggleVimMode();
+    vimModeButton.classList.toggle("active");
+  });
+
+  ReloadButton.addEventListener("click", () => {
+    const iframe = $("#iframe-preview");
+    iframe.srcdoc = iframe.srcdoc;
+  });
+
+  themeButton.addEventListener("click", () => {
+    themeOptions.classList.toggle("hidden");
+    themeOptions.classList.toggle("flex");
+    themeButton.classList.toggle("active");
+    options.classList.add("hidden");
+    options.classList.remove("flex");
+    optionsButton.classList.remove("active");
+  });
+
+  FullScreenButton.addEventListener("click", () => {
+    const iframe = $("#preview");
+    iframe.classList.toggle("full");
+    FullScreenButton.classList.toggle("active");
+  });
+
+  ShareButton.addEventListener("click", () => {
+    copyUrl(ShareButton);    
+  });
+
+  FullPreviewButton.addEventListener("click", openPreviewWindow);
+
+  DownloadButton.addEventListener("click", downloadCode);
+</script>

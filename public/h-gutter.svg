@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 410 60">
+  <g fill="#D9D9D9" clip-path="url(#a)">
+    <rect width="40" height="40" x="10" y="50" rx="15" transform="rotate(-90 10 50)"/>
+    <rect width="40" height="40" x="60" y="50" rx="15" transform="rotate(-90 60 50)"/>
+    <rect width="40" height="40" x="110" y="50" rx="15" transform="rotate(-90 110 50)"/>
+    <rect width="40" height="40" x="160" y="50" rx="15" transform="rotate(-90 160 50)"/>
+    <rect width="40" height="40" x="210" y="50" rx="15" transform="rotate(-90 210 50)"/>
+    <rect width="40" height="40" x="260" y="50" rx="15" transform="rotate(-90 260 50)"/>
+    <rect width="40" height="40" x="310" y="50" rx="15" transform="rotate(-90 310 50)"/>
+    <rect width="40" height="40" x="360" y="50" rx="15" transform="rotate(-90 360 50)"/>
+  </g>
+  <defs>
+    <clipPath id="a">
+      <path fill="#fff" d="M0 0h60v410H0z" transform="rotate(-90 30 30)"/>
+    </clipPath>
+  </defs>
+</svg>

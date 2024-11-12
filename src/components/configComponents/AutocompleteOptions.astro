@@ -1,0 +1,60 @@
+---
+
+---
+
+<select name="autocomplete" id="autocomplete" class="px-1 border rounded-md w-full text-sm">
+  <option value="true">ON</option>
+  <option value="false">OFF</option>
+</select>
+
+<div class="flex flex-col justify-start items-start gap-2 pt-2">
+  <label for="model" class="text-xs">Model</label>
+  <select name="model" id="model" class="px-1 border rounded-md w-full text-sm">
+    <option value="llama-3.2-3B">llama-3.2-3B (HF)</option>
+    <option value="gpt-4o">gpt-4o</option>
+    <option value="gpt-4o-mini">gpt-4o-mini</option>
+  </select>
+
+  <label for="openai-key" class="text-xs">Openai api key</label>
+  <input type="text" name="openai-key" id="openai-key" class="px-1 border rounded-md w-full text-sm outline-none" placeholder="sk_xxxxxxxxxxxxxxxxxxxxxxxxxx">
+  <label for="hf-key" class="text-xs">HuggingFace api key</label>
+  <input type="text" name="hf-key" id="hf-key" class="px-1 border rounded-md w-full text-sm outline-none" placeholder="hf_xxxxxxxxxxxxxxxxxxxxxxxxxx">
+</div>
+
+<script>
+  import { $ } from "../../utils/dom"
+  import { autocompleteStore } from "../../stores/autocompleteStore"
+
+  const autocomplete = $("#autocomplete")
+  const model = $("#model")
+  const openaiKey = $("#openai-key")
+  const hfKey = $("#hf-key")
+
+  autocomplete.addEventListener("change", (e) => {
+    autocompleteStore.set({
+      ...autocompleteStore.get(),
+      enabled: e.target.value === "true",
+    })
+  })
+
+  model.addEventListener("change", (e) => {
+    autocompleteStore.set({
+      ...autocompleteStore.get(),
+      model: e.target.value,
+    })
+  })
+
+  openaiKey.addEventListener("input", (e) => {
+    autocompleteStore.set({
+      ...autocompleteStore.get(),
+      openaiKey: e.target.value,
+    })
+  })
+
+  hfKey.addEventListener("input", (e) => {
+    autocompleteStore.set({
+      ...autocompleteStore.get(),
+      hfKey: e.target.value,
+    })
+  })
+</script>

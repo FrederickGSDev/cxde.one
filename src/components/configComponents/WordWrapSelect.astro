@@ -1,0 +1,22 @@
+---
+
+---
+
+<select name="word-wrap" id="word-wrap" class="px-1 border rounded-md w-full text-sm">
+  <option value="on">ON</option>
+  <option value="off">OFF</option>
+</select>
+
+<script>
+  import { $ } from "../../utils/dom";
+  import { optionsStore } from "../../stores/optionsStore";
+
+  const wordWrapSelect = $("#word-wrap");
+
+  wordWrapSelect.addEventListener("change", () => {
+    optionsStore.set({
+      ...optionsStore.get(),
+      wordWrap: wordWrapSelect.value
+    });
+  });
+</script>

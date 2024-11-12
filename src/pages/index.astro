@@ -1,0 +1,378 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Toolbar from '../components/Toolbar.astro';
+import HtmlIcon from '../icons/HtmlIcon.astro';
+import CssIcon from '../icons/CssIcon.astro';
+import JsIcon from '../icons/JsIcon.astro';
+import MaximizeButton from '../components/MaximizeButton.astro';
+---
+
+<Layout title="Cxde | HTML, CSS, JavaScript Live Editor Playground">
+	<Toolbar />
+	<main class="flex-1 w-full h-full overflow-hidden">
+		<section class="grid w-full h-full overflow-hidden" data-design="grid">
+			<div id="html" class="relative w-full h-full overflow-hidden" role="textbox" aria-label="html editor">
+				<span id="htmlStatusBar" class="bottom-0 left-0 z-10 absolute hidden bg-light dark:bg-black bg-opacity-80 px-2 w-full h-6 font-mono select-none statusbar"></span>
+				<MaximizeButton language="html" />
+				<div class="right-3 bottom-3 z-10 absolute w-5 aspect-square" id="html-icon"><HtmlIcon /></div>
+			</div>
+			<div id="css" class="relative w-full h-full overflow-hidden" role="textbox" aria-label="css editor">
+				<span id="cssStatusBar" class="bottom-0 left-0 z-10 absolute hidden bg-light dark:bg-black bg-opacity-80 px-2 w-full h-6 font-mono select-none statusbar"></span>
+				<MaximizeButton language="css" />
+				<div class="right-3 bottom-3 z-10 absolute w-5 aspect-square" id="css-icon"><CssIcon /></div>
+			</div>
+			<div id="js" class="relative w-full h-full overflow-hidden" role="textbox" aria-label="js editor">
+				<span id="jsStatusBar" class="bottom-0 left-0 z-10 absolute hidden bg-light dark:bg-black bg-opacity-80 px-2 w-full h-6 font-mono select-none statusbar"></span>
+				<MaximizeButton language="js" />
+				<div class="right-3 bottom-3 z-10 absolute rounded w-5 overflow-hidden aspect-square" id="js-icon"><JsIcon /></div>
+			</div>
+			<div id="preview" class="w-full h-full overflow-hidden">
+				<iframe title="preview" id="iframe-preview" srcdoc="" class="bg-white w-full h-full"></iframe>
+			</div>
+
+			<div class="z-10 bg-light dark:bg-dark first-gutter"></div>
+			<div class="z-10 bg-light dark:bg-dark second-gutter"></div>
+			<div class="z-10 bg-light dark:bg-dark third-gutter"></div>
+		</section>
+	</main>
+</Layout>
+
+<style>
+	[data-design="grid"] {
+		grid-template-rows: 1fr 6px 1fr;
+		grid-template-columns: 1fr 6px 1fr;
+	}
+
+	[data-design="grid"] .first-gutter {
+		cursor: col-resize;
+		grid-row: 1 / 4;
+		grid-column: 2 / 3;
+		background-image: url(/v-gutter.svg);
+		background-repeat: no-repeat;
+		background-position: 50%;
+	}
+
+	[data-design="grid"] .second-gutter {
+		cursor: row-resize;
+		grid-row: 2 / 3;
+		grid-column: 1 / 4;
+		background-image: url(/h-gutter.svg);
+		background-repeat: no-repeat;
+		background-position: 50%;
+	}
+
+	[data-design="grid"] .third-gutter {
+		cursor: all-scroll;
+		grid-row: 2 / 3;
+		grid-column: 2 / 3;
+		background-image: url(/m-gutter.svg);
+		background-repeat: no-repeat;
+		background-position: 50%;
+	}
+
+	[data-design="grid"] #html {
+		grid-row: 1 / 2;
+		grid-column: 1 / 2;
+	}
+
+	[data-design="grid"] #css {
+		grid-row: 1 / 2;
+		grid-column: 3 / 4;
+	}
+
+	[data-design="grid"] #js {
+		grid-row: 3 / 4;
+		grid-column: 1 / 2;
+	}
+
+	[data-design="grid"] #preview {
+		grid-row: 3 / 4;
+		grid-column: 3 / 4;
+	}
+
+	[data-design="vertical"] .first-gutter {
+		cursor: col-resize;
+		grid-row: 1 / 4;
+		grid-column: 2 / 3;
+		background-image: url(/v-gutter.svg);
+		background-repeat: no-repeat;
+		background-position: 50%;
+	}
+
+	[data-design="vertical"] .second-gutter {
+		cursor: col-resize;
+		grid-row: 1 / 4;
+		grid-column: 4 / 5;
+		background-image: url(/v-gutter.svg);
+		background-repeat: no-repeat;
+		background-position: 50%;
+	}
+
+	[data-design="vertical"] .third-gutter {
+		cursor: col-resize;
+		grid-row: 1 / 4;
+		grid-column: 6 / 7;
+		background-image: url(/v-gutter.svg);
+		background-repeat: no-repeat;
+		background-position: 50%;
+	}
+
+	[data-design="vertical"] #html {
+		grid-row: 1 / 2;
+		grid-column: 1 / 2;
+	}
+
+	[data-design="vertical"] #css {
+		grid-row: 1 / 2;
+		grid-column: 3 / 4;
+	}
+
+	[data-design="vertical"] #js {
+		grid-row: 1 / 2;
+		grid-column: 5 / 6;
+	}
+
+	[data-design="vertical"] #preview {
+		grid-row: 1 / 2;
+		grid-column: 7 / 8;
+	}
+
+	[data-design="horizontal"] .first-gutter {
+		cursor: row-resize;
+		grid-row: 2 / 3;
+		grid-column: 1 / 4;
+		background-image: url(/h-gutter.svg);
+		background-repeat: no-repeat;
+		background-position: 50%;
+	}
+
+	[data-design="horizontal"] .second-gutter {
+		cursor: row-resize;
+		grid-row: 4 / 5;
+		grid-column: 1 / 4;
+		background-image: url(/h-gutter.svg);
+		background-repeat: no-repeat;
+		background-position: 50%;
+	}
+
+	[data-design="horizontal"] .third-gutter {
+		cursor: row-resize;
+		grid-row: 6 / 7;
+		grid-column: 1 / 4;
+		background-image: url(/h-gutter.svg);
+		background-repeat: no-repeat;
+		background-position: 50%;
+	}
+
+	[data-design="horizontal"] #html {
+		grid-row: 1 / 2;
+		grid-column: 1 / 2;
+	}
+
+	[data-design="horizontal"] #css {
+		grid-row: 3 / 4;
+		grid-column: 1 / 2;
+	}
+
+	[data-design="horizontal"] #js {
+		grid-row: 5 / 6;
+		grid-column: 1 / 2;
+	}
+
+	[data-design="horizontal"] #preview {
+		grid-row: 7 / 8;
+		grid-column: 1 / 2;
+	}
+
+	[data-design="top"] .first-gutter {
+		cursor: col-resize;
+		grid-row: 2 / 4;
+		grid-column: 2 / 3;
+		background-image: url(/v-gutter.svg);
+		background-repeat: no-repeat;
+		background-position: 50%;
+	}
+
+	[data-design="top"] .second-gutter {
+		cursor: col-resize;
+		grid-row: 2 / 4;
+		grid-column: 4 / 5;
+		background-image: url(/v-gutter.svg);
+		background-repeat: no-repeat;
+		background-position: 50%;
+	}
+
+	[data-design="top"] .third-gutter {
+		cursor: row-resize;
+		grid-row: 2 / 3;
+		grid-column: 1 / 6;
+		background-image: url(/h-gutter.svg);
+		background-repeat: no-repeat;
+		background-position: 50%;
+	}
+
+	[data-design="top"] #html {
+		grid-row: 3 / 4;
+		grid-column: 1 / 3;
+	}
+
+	[data-design="top"] #css {
+		grid-row: 3 / 4;
+		grid-column: 3 / 5;
+	}
+
+	[data-design="top"] #js {
+		grid-row: 3 / 4;
+		grid-column: 5 / 7;
+	}
+
+	[data-design="top"] #preview {
+		grid-row: 1 / 2;
+		grid-column: 1 / 6;
+	}
+
+	[data-design="bottom"] .first-gutter {
+		cursor: col-resize;
+		grid-row: 1 / 2;
+		grid-column: 2 / 3;
+		background-image: url(/v-gutter.svg);
+		background-repeat: no-repeat;
+		background-position: 50%;
+	}
+
+	[data-design="bottom"] .second-gutter {
+		cursor: col-resize;
+		grid-row: 1 / 2;
+		grid-column: 4 / 5;
+		background-image: url(/v-gutter.svg);
+		background-repeat: no-repeat;
+		background-position: 50%;
+	}
+
+	[data-design="bottom"] .third-gutter {
+		cursor: row-resize;
+		grid-row: 2 / 3;
+		grid-column: 1 / 6;
+		background-image: url(/h-gutter.svg);
+		background-repeat: no-repeat;
+		background-position: 50%;
+	}
+
+	[data-design="bottom"] #html {
+		grid-row: 1 / 2;
+		grid-column: 1 / 3;
+	}
+
+	[data-design="bottom"] #css {
+		grid-row: 1 / 2;
+		grid-column: 3 / 5;
+	}
+
+	[data-design="bottom"] #js {
+		grid-row: 1 / 2;
+		grid-column: 5 / 7;
+	}
+
+	[data-design="bottom"] #preview {
+		grid-row: 3 / 4;
+		grid-column: 1 / 6;
+	}
+
+	[data-design="right"] .first-gutter {
+		cursor: col-resize;
+		grid-row: 1 / 6;
+		grid-column: 2 / 3;
+		background-image: url(/v-gutter.svg);
+		background-repeat: no-repeat;
+		background-position: 50%;
+	}
+
+	[data-design="right"] .second-gutter {
+		cursor: row-resize;
+		grid-row: 2 / 3;
+		grid-column: 1 / 2;
+		background-image: url(/h-gutter.svg);
+		background-repeat: no-repeat;
+		background-position: 50%;
+	}
+
+	[data-design="right"] .third-gutter {
+		cursor: row-resize;
+		grid-row: 4 / 5;
+		grid-column: 1 / 2;
+		background-image: url(/h-gutter.svg);
+		background-repeat: no-repeat;
+		background-position: 50%;
+	}
+
+	[data-design="right"] #html {
+		grid-row: 1 / 2;
+		grid-column: 1 / 2;
+	}
+
+	[data-design="right"] #css {
+		grid-row: 3 / 4;
+		grid-column: 1 / 2;
+	}
+
+	[data-design="right"] #js {
+		grid-row: 5 / 6;
+		grid-column: 1 / 2;
+	}
+
+	[data-design="right"] #preview {
+		grid-row: 1 / 6;
+		grid-column: 3 / 4;
+	}
+
+	[data-design="left"] .first-gutter {
+		cursor: col-resize;
+		grid-row: 1 / 6;
+		grid-column: 2 / 3;
+		background-image: url(/v-gutter.svg);
+		background-repeat: no-repeat;
+		background-position: 50%;
+	}
+
+	[data-design="left"] .second-gutter {
+		cursor: row-resize;
+		grid-row: 2 / 3;
+		grid-column: 2 / 4;
+		background-image: url(/h-gutter.svg);
+		background-repeat: no-repeat;
+		background-position: 50%;
+	}
+
+	[data-design="left"] .third-gutter {
+		cursor: row-resize;
+		grid-row: 4 / 5;
+		grid-column: 2 / 4;
+		background-image: url(/h-gutter.svg);
+		background-repeat: no-repeat;
+		background-position: 50%;
+	}
+
+	[data-design="left"] #html {
+		grid-row: 1 / 2;
+		grid-column: 3 / 4;
+	}
+
+	[data-design="left"] #css {
+		grid-row: 3 / 4;
+		grid-column: 3 / 4;
+	}
+
+	[data-design="left"] #js {
+		grid-row: 5 / 6;
+		grid-column: 3 / 4;
+	}
+
+	[data-design="left"] #preview {
+		grid-row: 1 / 6;
+		grid-column: 1 / 2;
+	}
+</style>
+
+<script>
+	import '../scripts/monaco'
+</script>

@@ -1,0 +1,49 @@
+---
+import DesignSelect from "./DesignSelect.astro"
+import FontsizeSelect from "./FontsizeSelect.astro"
+import LineNumbersSelect from "./LineNumbersSelect.astro"
+import WordWrapSelect from "./WordWrapSelect.astro"
+import ClearConsoleSelect from "./ClearConsoleSelect.astro"
+import MinimapSelect from "./MinimapSelect.astro"
+import DelaySelect from "./DelaySelect.astro"
+// import AutocompleteOptions from "./AutocompleteOptions.astro"
+---
+
+<div class="flex-col items-center hidden px-4 py-4 pl-2 h-full font-mono overflow-y-auto" id="options">
+  <span class="mb-1 w-full font-semibold text-center text-lg">Configuration</span>
+  <div class="flex flex-col gap-4">
+    <div>
+      <span class="font-medium text-sm">Design</span>
+      <DesignSelect />
+    </div>
+    <div class="flex flex-col gap-1">
+      <span class="font-medium text-sm">Font size</span>      
+        <FontsizeSelect />
+    </div>
+    <div class="flex flex-col gap-1">
+      <span class="font-medium text-sm">Line Numbers</span>      
+        <LineNumbersSelect />
+    </div>
+    <div class="flex flex-col gap-1">
+      <span class="font-medium text-sm">WordWrap</span>      
+        <WordWrapSelect />
+    </div>
+    <div class="flex flex-col gap-1">
+      <span class="font-medium text-sm">Minimap</span>      
+        <MinimapSelect />
+    </div>
+    <div class="flex flex-col gap-1">
+      <span class="font-medium text-sm">Clear Console</span>      
+        <ClearConsoleSelect />
+    </div>
+    <div class="flex flex-col gap-1">
+      <span class="font-medium text-sm">Delay</span>      
+        <DelaySelect />
+    </div>
+    <!-- Coming soon... -->
+    <!-- <div class="flex flex-col gap-1">
+      <span class="font-medium text-sm">Autocomplete</span>      
+        <AutocompleteOptions />
+    </div> -->
+  </div>
+</div>

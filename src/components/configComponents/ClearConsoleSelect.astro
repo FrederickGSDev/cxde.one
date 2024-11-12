@@ -1,0 +1,19 @@
+---
+
+---
+
+<select name="clear-console" id="clear-console" class="px-1 border rounded-md w-full text-sm">
+  <option value="true">ON</option>
+  <option value="false">OFF</option>
+</select>
+
+<script>
+  import { $ } from "../../utils/dom"
+  import { clearConsoleStore } from "../../stores/clearConsoleStore"
+
+  const select = $("#clear-console")
+  select.addEventListener("change", () => {
+    const value = select.value === "true"
+    clearConsoleStore.set(value)
+  })
+</script>

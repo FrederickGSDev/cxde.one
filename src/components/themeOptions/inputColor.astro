@@ -1,0 +1,59 @@
+---
+const { title, id, initialColor } = Astro.props
+---
+
+<div class="flex justify-start items-center gap-2 input-color" data-inputcolor-id={id}>
+  <input type="color" value={initialColor} id={id}  class="bg-transparent mx-auto border-none w-10 h-10 cursor-pointer"/>
+  <div class="flex flex-col justify-center items-start">
+    <p>{title}</p>
+    <span class="text-xs text-opacity-60">{initialColor}</span>
+  </div>
+</div>
+
+<style>
+  input[type="color"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+  input[type="color"]::-webkit-color-swatch {
+    border-radius: 2px;
+    border: none;
+  }
+
+  input[type="color"]::-moz-color-swatch {
+    border-radius: 15px;
+    border: none;
+  }
+</style>
+
+<script>
+  import { $, $$ } from "../../utils/dom";
+  import { colorsStore } from "../../stores/colorsStore";
+  import { debounce } from "../../utils/debounce";
+
+  const inputColorsContainers = $$(".input-color");
+
+  inputColorsContainers.forEach((inputColorContainer) => {
+    const inputColor = $('input[type="color"]', inputColorContainer);
+    const span = $("span", inputColorContainer);
+
+    inputColor.addEventListener("input", (e) => {
+      debounceHandleInput(e, 100);
+    });
+
+    const debounceHandleInput = debounce(handleInput);
+    function handleInput(e) {
+      const color = e.target.value;
+      const id = e.target.id;
+      span.textContent = color;
+
+      colorsStore.set({
+        ...colorsStore.get(),
+        [id]: color.toUpperCase(),
+      });
+      document.documentElement.style.setProperty(`--editor-${id}`, color);
+    }
+  });
+</script>

@@ -1,0 +1,235 @@
+---
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>{title}</title>
+		<meta
+			name="description"
+			content="Cxde is an online HTML, CSS and JavaScript code editor with real-time preview and Vim mode"
+		/>
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+	</head>
+	<body
+		class="flex bg-light dark:bg-dark w-full h-screen text-light dark:text-dark"
+	>
+		<slot />
+	</body>
+</html>
+
+<style is:global>
+	:root {
+		/* HTML */
+		--editor-tag: #569cd6;
+		--editor-delimiters: #808080;
+		--editor-attributes: #9cdcfe;
+		--editor-html-values: #ce9178;
+		--editor-text: #d4d4d4;
+		--editor-html-comments: #608b4e;
+		/* CSS */
+		--editor-properties: #9cdcfe;
+		--editor-css-values: #ce9178;
+		--editor-css-brackets: #ffd700;
+		--editor-css-comments: #608b4e;
+		--editor-selectors: #569cd6;
+		--editor-units: #b5cea8;
+		/* JS */
+		--editor-keywords: #569cd6;
+		--editor-functions: #d4d4d4;
+		--editor-js-strings: #ce9178;
+		--editor-numbers: #b5cea8;
+		--editor-operators: #dcdcdc;
+		--editor-js-constants: #3dc9b0;
+		--editor-js-brackets-0: #ffd700;
+		--editor-js-brackets-1: #da70d6;
+		--editor-js-brackets-2: #179fff;
+		--editor-js-comments: #608b4e;
+		/* GENERAL */
+		--editor-general-background: #1e1e1e;
+		--editor-general-linenumbers: #c6c6c6;
+		--editor-general-currentline: #282828;
+		/* CXDE */
+		--editor-cxde-background: #393d42;
+		--editor-cxde-text: #c5c5c5;
+	}
+
+	body, aside, .first-gutter, .second-gutter, .third-gutter {
+		background-color: var(--editor-cxde-background) !important;
+		color: var(--editor-cxde-text) !important;
+	}
+
+	.active {
+		color: color-mix(in srgb, var(--editor-cxde-text) 40%, white 60%);
+	}
+
+	aside button:hover {
+		color: color-mix(in srgb, var(--editor-cxde-text) 40%, white 60%);
+	}
+
+	#options {
+		& select {
+			background-color: var(--editor-cxde-background);
+			color: var(--editor-cxde-text);
+			border: 1px solid var(--editor-cxde-text);
+		}
+
+		& input[type="range"] {
+			accent-color: var(--editor-cxde-text);
+		}
+
+		& input[type="text"] {
+			background-color: var(--editor-cxde-background);
+			color: var(--editor-cxde-text);
+			border: 1px solid var(--editor-cxde-text);
+		}
+	}
+
+	.statusbar {
+		background-color: var(--editor-cxde-background) !important;
+		color: var(--editor-cxde-text) !important;
+	}
+
+	#html {
+		& .mtk1 {
+			color: var(--editor-text);
+		}
+
+		& .mtk4 {
+			color: var(--editor-attributes);
+		}
+
+		& .mtk5 {
+			color: var(--editor-html-values);
+		}
+
+		& .mtk7 {
+			color: var(--editor-html-comments);
+		}
+
+		& .mtk8 {
+			color: var(--editor-tag);
+		}
+
+		& .mtk10 {
+			color: var(--editor-delimiters);
+		}
+	}
+
+	#css {
+		& .mtk4 {
+			color: var(--editor-properties);
+		}
+
+		& .mtk5 {
+			color: var(--editor-css-values);
+		}
+
+		& .mtk6 {
+			color: var(--editor-units);
+		}
+
+		& .mtk7 {
+			color: var(--editor-css-comments);
+		}
+
+		& .mtk8 {
+			color: var(--editor-selectors);
+		}
+
+		& .mtk9 {
+			color: var(--editor-css-brackets);
+		}
+	}
+
+	#js {
+		& .mtk1 {
+			color: var(--editor-functions);
+		}
+
+		& .mtk5 {
+			color: var(--editor-js-strings);
+		}
+
+		& .mtk6 {
+			color: var(--editor-numbers);
+		}
+
+		& .mtk7 {
+			color: var(--editor-js-comments);
+		}
+
+		& .mtk8 {
+			color: var(--editor-keywords);
+		}
+
+		& .mtk9 {
+			color: var(--editor-operators);
+		}
+
+		& .mtk22 {
+			color: var(--editor-js-constants);
+		}
+
+		& .monaco-editor .bracket-highlighting-0{
+			color: var(--editor-js-brackets-0);
+		}
+
+		& .monaco-editor .bracket-highlighting-1{
+			color: var(--editor-js-brackets-1);
+		}
+
+		& .monaco-editor .bracket-highlighting-2{
+			color: var(--editor-js-brackets-2);
+		}
+	}
+
+	.monaco-editor {
+		--vscode-editorGutter-background: var(--editor-general-background) !important;
+		--vscode-editor-background: var(--editor-general-background) !important;
+		--vscode-breadcrumb-background: var(--editor-general-background) !important;
+		--vscode-editorStickyScroll-background: var(--editor-general-background) !important;
+		--vscode-editorLineNumber-activeForeground: var(--editor-general-linenumbers) !important;
+		--vscode-editor-lineHighlightBorder: var(--editor-general-background) !important;
+	}
+
+	.overflow-guard {
+		background-color: var(--editor-general-background) !important;
+	}
+
+	.monaco-editor .view-overlays .current-line-exact {
+		border: 2px solid var(--editor-general-currentline) !important;
+	}
+
+	.scrollbar.vertical,
+	.slider {
+		width: 5px !important;
+		/* background-color: var(--editor-general-scrollbar) !important; */
+	}
+
+	.scrollbar.vertical:hover,
+	.slider:hover {
+		width: 10px !important;
+	}
+
+	.decorationsOverviewRuler {
+		display: none !important;
+	}
+
+	/* Full */
+	.full{
+		grid-row: 1 / -1;
+		grid-column: 1 / -1;
+		z-index: 999;
+		width: calc(100vw - 52px);
+		height: 100vh;
+	}
+</style>
