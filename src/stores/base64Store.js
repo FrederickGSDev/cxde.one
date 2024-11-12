@@ -1,5 +1,6 @@
 import { atom } from 'nanostores'
 import { debounce } from '../utils/debounce'
+import { delayStore } from './delayStore'
 
 const debounceSetUrlBase64 = debounce(setUrlBase64)
 
@@ -10,7 +11,7 @@ export const base64Store = atom({
 
 base64Store.listen((value) => {
   if (base64Store.get().isActive) {
-    debounceSetUrlBase64(value.base64, 500)
+    debounceSetUrlBase64(value.base64, delayStore.get())
   }
 })
 

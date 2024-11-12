@@ -15,10 +15,12 @@ export const codeStore = atom({
 
 codeStore.listen((value) => {
   debounceUpdateIframe(value, delayStore.get())
-  const previewWindow = previewWindowStore.get()
-  if (previewWindow) {
-    const previewHtml = generateHtml({ html: value.html, css: value.css, js: value.js })
-    const blob = new Blob([previewHtml], { type: 'text/html' })
-    previewWindow.location.href = URL.createObjectURL(blob)
-  }
+  debounce(() => {
+    const previewWindow = previewWindowStore.get()
+    if (previewWindow) {
+      const previewHtml = generateHtml({ html: value.html, css: value.css, js: value.js })
+      const blob = new Blob([previewHtml], { type: 'text/html' })
+      previewWindow.location.href = URL.createObjectURL(blob)
+    }
+  }, delayStore.get())()
 })
