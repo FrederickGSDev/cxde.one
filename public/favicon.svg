@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1000 1000">
+  <g clip-path="url(#a)">
+    <rect width="1000" height="1000" fill="#1A1A1A" rx="250"/>
+    <g stroke="#C5C5C5" stroke-linecap="round" stroke-linejoin="round" stroke-width="50" clip-path="url(#b)">
+      <path d="M250 733.333 166.667 687.5V583.333M166.667 416.667V312.5L250 266.667M416.667 170.833 500 125l83.333 45.833M750 266.667l83.333 45.833v104.167M833.333 583.333V687.5L750 734.167M583.333 829.167 500 875l-83.333-45.833M500 500l83.333-45.833M750 358.333l83.333-45.833M500 500v104.167M500 770.833V875M500 500l-83.333-46.667M250 358.333 166.667 312.5"/>
+    </g>
+  </g>
+  <defs>
+    <clipPath id="a">
+      <rect width="1000" height="1000" fill="#fff" rx="250"/>
+    </clipPath>
+    <clipPath id="b">
+      <path fill="#fff" d="M0 0h1000v1000H0z"/>
+    </clipPath>
+  </defs>
+  <style>
+    rect {
+      fill: #C5C5C5;
+    }
+
+    g {
+      stroke: #1A1A1A;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      rect {
+        fill: #1A1A1A;
+      }
+
+      g {
+        stroke: #C5C5C5;
+      }
+    }
+  </style>
+</svg>
