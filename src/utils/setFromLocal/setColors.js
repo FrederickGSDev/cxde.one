@@ -8,7 +8,8 @@ export function setColors (colors) {
   })
 
   Object.entries(colors).forEach(([key, value]) => {
-    const inputContainer = $(`[data-inputcolor-id="${key}"`)
+    const inputContainer = $(`[data-inputcolor-id="${key}"]`)
+    if (!inputContainer) return
     const input = $('input', inputContainer)
     const span = $('span', inputContainer)
     if (input) input.value = value

@@ -34,21 +34,31 @@ const { title } = Astro.props;
 
 <style is:global>
 	:root {
+		/* CXDE */
+		--editor-cxde-background: #393d42;
+		--editor-cxde-text: #c5c5c5;
 		/* HTML */
+		--editor-html-background: #1e1e1e;
 		--editor-tag: #569cd6;
 		--editor-delimiters: #808080;
 		--editor-attributes: #9cdcfe;
 		--editor-html-values: #ce9178;
 		--editor-text: #d4d4d4;
 		--editor-html-comments: #608b4e;
+		--editor-html-linenumbers: #c6c6c6;
+		--editor-html-currentline: #282828;
 		/* CSS */
+		--editor-css-background: #1e1e1e;
 		--editor-properties: #9cdcfe;
 		--editor-css-values: #ce9178;
 		--editor-css-brackets: #ffd700;
 		--editor-css-comments: #608b4e;
 		--editor-selectors: #569cd6;
 		--editor-units: #b5cea8;
+		--editor-css-linenumbers: #c6c6c6;
+		--editor-css-currentline: #282828;
 		/* JS */
+		--editor-js-background: #1e1e1e;
 		--editor-keywords: #569cd6;
 		--editor-functions: #d4d4d4;
 		--editor-js-strings: #ce9178;
@@ -59,13 +69,8 @@ const { title } = Astro.props;
 		--editor-js-brackets-1: #da70d6;
 		--editor-js-brackets-2: #179fff;
 		--editor-js-comments: #608b4e;
-		/* GENERAL */
-		--editor-general-background: #1e1e1e;
-		--editor-general-linenumbers: #c6c6c6;
-		--editor-general-currentline: #282828;
-		/* CXDE */
-		--editor-cxde-background: #393d42;
-		--editor-cxde-text: #c5c5c5;
+		--editor-js-linenumbers: #c6c6c6;
+		--editor-js-currentline: #282828;
 	}
 
 	body, aside, .first-gutter, .second-gutter, .third-gutter {
@@ -128,6 +133,23 @@ const { title } = Astro.props;
 		& .mtk10 {
 			color: var(--editor-delimiters);
 		}
+
+		.monaco-editor {
+			--vscode-editorGutter-background: var(--editor-html-background) !important;
+			--vscode-editor-background: var(--editor-html-background) !important;
+			--vscode-breadcrumb-background: var(--editor-html-background) !important;
+			--vscode-editorStickyScroll-background: var(--editor-html-background) !important;
+			--vscode-editorLineNumber-activeForeground: var(--editor-html-linenumbers) !important;
+			--vscode-editor-lineHighlightBorder: var(--editor-html-background) !important;
+		}
+
+		.overflow-guard {
+			background-color: var(--editor-html-background) !important;
+		}
+
+		.monaco-editor .view-overlays .current-line-exact {
+			border: 2px solid var(--editor-html-currentline) !important;
+		}
 	}
 
 	#css {
@@ -153,6 +175,23 @@ const { title } = Astro.props;
 
 		& .mtk9 {
 			color: var(--editor-css-brackets);
+		}
+
+		.monaco-editor {
+			--vscode-editorGutter-background: var(--editor-css-background) !important;
+			--vscode-editor-background: var(--editor-css-background) !important;
+			--vscode-breadcrumb-background: var(--editor-css-background) !important;
+			--vscode-editorStickyScroll-background: var(--editor-css-background) !important;
+			--vscode-editorLineNumber-activeForeground: var(--editor-css-linenumbers) !important;
+			--vscode-editor-lineHighlightBorder: var(--editor-css-background) !important;
+		}
+
+		.overflow-guard {
+			background-color: var(--editor-css-background) !important;
+		}
+
+		.monaco-editor .view-overlays .current-line-exact {
+			border: 2px solid var(--editor-css-currentline) !important;
 		}
 	}
 
@@ -196,23 +235,23 @@ const { title } = Astro.props;
 		& .monaco-editor .bracket-highlighting-2{
 			color: var(--editor-js-brackets-2);
 		}
-	}
 
-	.monaco-editor {
-		--vscode-editorGutter-background: var(--editor-general-background) !important;
-		--vscode-editor-background: var(--editor-general-background) !important;
-		--vscode-breadcrumb-background: var(--editor-general-background) !important;
-		--vscode-editorStickyScroll-background: var(--editor-general-background) !important;
-		--vscode-editorLineNumber-activeForeground: var(--editor-general-linenumbers) !important;
-		--vscode-editor-lineHighlightBorder: var(--editor-general-background) !important;
-	}
+		.monaco-editor {
+			--vscode-editorGutter-background: var(--editor-js-background) !important;
+			--vscode-editor-background: var(--editor-js-background) !important;
+			--vscode-breadcrumb-background: var(--editor-js-background) !important;
+			--vscode-editorStickyScroll-background: var(--editor-js-background) !important;
+			--vscode-editorLineNumber-activeForeground: var(--editor-js-linenumbers) !important;
+			--vscode-editor-lineHighlightBorder: var(--editor-js-background) !important;
+		}
 
-	.overflow-guard {
-		background-color: var(--editor-general-background) !important;
-	}
+		.overflow-guard {
+			background-color: var(--editor-js-background) !important;
+		}
 
-	.monaco-editor .view-overlays .current-line-exact {
-		border: 2px solid var(--editor-general-currentline) !important;
+		.monaco-editor .view-overlays .current-line-exact {
+			border: 2px solid var(--editor-js-currentline) !important;
+		}
 	}
 
 	.scrollbar.vertical,
